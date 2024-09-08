@@ -65,8 +65,6 @@ from ShaderFlow.Modules.Keyboard import ShaderKeyboard
 from ShaderFlow.Shader import ShaderObject
 from ShaderFlow.Variable import ShaderVariable
 
-from xvfbwrapper import Xvfb
-
 
 class WindowBackend(BrokenEnum):
     Headless = "headless"
@@ -530,16 +528,8 @@ class ShaderScene(ShaderModule):
         # Note: (https://forums.developer.nvidia.com/t/81412) (https://brokensrc.dev/get/docker/)
         backend = ("egl" if BrokenPlatform.OnLinux and eval(os.getenv("WINDOW_EGL", "1")) else None)
 
-        vdisplay = Xvfb()
-        vdisplay.start()
-
-        # ctx = moderngl.create_context(standalone=True)
-        # print(ctx.info['GL_VENDOR'])
         # Dynamically import the ModernGL Window Backend and instantiate it. Vsync is on our side 😉
-        # module = "moderngl_window.context.headless"
-        module = f"moderngl_window.context.headless"
-        # Create a context
-        # Check if the context is using a GPU
+        module = "moderngl_window.context.headless"
         self.window = importlib.import_module(module).Window(
             size=self.resolution,
             title=self.title,
@@ -549,7 +539,6 @@ class ShaderScene(ShaderModule):
             vsync=False,
             backend="egl"
         )
-        print(self.window.ctx)
         ShaderKeyboard.set_keymap(self.window.keys)
         self.imgui  = ModernglImgui(self.window)
         self.opengl = self.window.ctx
