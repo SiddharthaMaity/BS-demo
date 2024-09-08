@@ -502,7 +502,7 @@ class ShaderScene(ShaderModule):
     # ---------------------------------------------------------------------------------------------|
     # Window, OpenGL, Backend
 
-    backend: WindowBackend = WindowBackend.get(os.getenv("WINDOW_BACKEND", WindowBackend.Headless))
+    backend: WindowBackend = WindowBackend.get(os.getenv("WINDOW_BACKEND", WindowBackend.GLFW))
     """The ModernGL Window Backend. **Cannot be changed after creation**. Can also be set with the
     environment variable `WINDOW_BACKEND=<backend>`, where `backend = {glfw, headless}`"""
 
@@ -530,6 +530,8 @@ class ShaderScene(ShaderModule):
 
         # Dynamically import the ModernGL Window Backend and instantiate it. Vsync is on our side 😉
         module = "moderngl_window.context.headless"
+        context = moderngl.create_standalone_context()
+        print(context.info)
         self.window = importlib.import_module(module).Window(
             size=self.resolution,
             title=self.title,
