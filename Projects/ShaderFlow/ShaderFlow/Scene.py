@@ -533,13 +533,14 @@ class ShaderScene(ShaderModule):
         vdisplay = Xvfb()
         vdisplay.start()
 
-        ctx = moderngl.create_context(standalone=True)
-        print(ctx.info['GL_VENDOR'])
+        # ctx = moderngl.create_context(standalone=True)
+        # print(ctx.info['GL_VENDOR'])
         # Dynamically import the ModernGL Window Backend and instantiate it. Vsync is on our side 😉
-        module = "moderngl_window.context.headless"
+        # module = "moderngl_window.context.headless"
+        module = f"moderngl_window.context.{denum(self.backend).lower()}"
         # Create a context
         # Check if the context is using a GPU
-        self.window = ctx.Window(
+        self.window = importlib.import_module(module).Window(
             size=self.resolution,
             title=self.title,
             resizable=self.resizable,
