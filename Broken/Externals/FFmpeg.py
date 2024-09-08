@@ -191,7 +191,8 @@ class FFmpegVideoCodecH264(FFmpegModuleBase):
     rgb: bool = Field(default=False)
 
     def command(self, ffmpeg: BrokenFFmpeg) -> Iterable[str]:
-        yield every("-c:v", "libx264rgb" if self.rgb else "libx264")
+        # yield every("-c:v", "libx264rgb" if self.rgb else "libx264")
+        yield every("-c:v", "h264_nvenc")
         yield every("-profile", self.profile)
         yield every("-preset", self.preset)
         yield every("-tune", self.tune)
