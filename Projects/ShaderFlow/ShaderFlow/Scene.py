@@ -528,10 +528,12 @@ class ShaderScene(ShaderModule):
         # Note: (https://forums.developer.nvidia.com/t/81412) (https://brokensrc.dev/get/docker/)
         backend = ("egl" if BrokenPlatform.OnLinux and eval(os.getenv("WINDOW_EGL", "1")) else None)
 
+        ctx = moderngl.create_context(standalone=True)
+        print(ctx.info['GL_VENDOR'])
         # Dynamically import the ModernGL Window Backend and instantiate it. Vsync is on our side 😉
         module = "moderngl_window.context.headless"
-        context = moderngl.create_standalone_context()
-        print(context.info)
+        # Create a context
+        # Check if the context is using a GPU
         self.window = importlib.import_module(module).Window(
             size=self.resolution,
             title=self.title,
