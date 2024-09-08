@@ -454,7 +454,7 @@ class ShaderScene(ShaderModule):
 
         self._aspect_ratio = value
 
-        if (self.backend == WindowBackend.Headless):
+        if (self.backend == WindowBackend.GLFW):
             num, den = limited_ratio(self._aspect_ratio, limit=2**20) or (glfw.DONT_CARE, glfw.DONT_CARE)
             glfw.set_window_aspect_ratio(self.window._window, num, den)
 
@@ -502,7 +502,7 @@ class ShaderScene(ShaderModule):
     # ---------------------------------------------------------------------------------------------|
     # Window, OpenGL, Backend
 
-    backend: WindowBackend = WindowBackend.get(os.getenv("WINDOW_BACKEND", WindowBackend.GLFW))
+    backend: WindowBackend = WindowBackend.get(os.getenv("WINDOW_BACKEND", WindowBackend.Headless))
     """The ModernGL Window Backend. **Cannot be changed after creation**. Can also be set with the
     environment variable `WINDOW_BACKEND=<backend>`, where `backend = {glfw, headless}`"""
 
