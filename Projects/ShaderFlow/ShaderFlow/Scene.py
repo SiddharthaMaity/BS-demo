@@ -454,7 +454,7 @@ class ShaderScene(ShaderModule):
 
         self._aspect_ratio = value
 
-        if (self.backend == WindowBackend.GLFW):
+        if (self.backend == WindowBackend.Headless):
             num, den = limited_ratio(self._aspect_ratio, limit=2**20) or (glfw.DONT_CARE, glfw.DONT_CARE)
             glfw.set_window_aspect_ratio(self.window._window, num, den)
 
