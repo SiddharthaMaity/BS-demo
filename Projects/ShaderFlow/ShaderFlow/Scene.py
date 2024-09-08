@@ -65,6 +65,8 @@ from ShaderFlow.Modules.Keyboard import ShaderKeyboard
 from ShaderFlow.Shader import ShaderObject
 from ShaderFlow.Variable import ShaderVariable
 
+from xvfbwrapper import Xvfb
+
 
 class WindowBackend(BrokenEnum):
     Headless = "headless"
@@ -527,6 +529,9 @@ class ShaderScene(ShaderModule):
         # Linux: Use EGL for creating a OpenGL context, allows true headless with GPU acceleration
         # Note: (https://forums.developer.nvidia.com/t/81412) (https://brokensrc.dev/get/docker/)
         backend = ("egl" if BrokenPlatform.OnLinux and eval(os.getenv("WINDOW_EGL", "1")) else None)
+
+        vdisplay = Xvfb()
+        vdisplay.start()
 
         ctx = moderngl.create_context(standalone=True)
         print(ctx.info['GL_VENDOR'])
