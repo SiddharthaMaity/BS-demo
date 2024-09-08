@@ -537,7 +537,7 @@ class ShaderScene(ShaderModule):
         # print(ctx.info['GL_VENDOR'])
         # Dynamically import the ModernGL Window Backend and instantiate it. Vsync is on our side 😉
         # module = "moderngl_window.context.headless"
-        module = f"moderngl_window.context.{denum(self.backend).lower()}"
+        module = f"moderngl_window.context.headless"
         # Create a context
         # Check if the context is using a GPU
         self.window = importlib.import_module(module).Window(
