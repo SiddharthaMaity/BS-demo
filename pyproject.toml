@@ -1,22 +1,24 @@
 [project.urls]
-GitHub    = "https://github.com/BrokenSource/BrokenSource"
+GitHub = "https://github.com/BrokenSource/BrokenSource"
 Changelog = "https://brokensrc.dev/news/category/releases"
-Funding   = "https://brokensrc.dev/about/sponsors"
-Contact   = "https://brokensrc.dev/about/contact"
-Download  = "https://brokensrc.dev/get/releases"
-Docs      = "https://brokensrc.dev/broken"
-Homepage  = "https://brokensrc.dev"
+Funding = "https://brokensrc.dev/about/sponsors"
+Contact = "https://brokensrc.dev/about/contact"
+Download = "https://brokensrc.dev/get/releases"
+Docs = "https://brokensrc.dev/broken"
+Homepage = "https://brokensrc.dev"
 
 [tool.hatch.version]
 path = "Broken/Version.py"
 
 [project]
-name         = "broken-source"
-dynamic      = ["version"]
-description  = "🚀 Broken Source Software Main Library"
-authors      = [{name="Tremeschin", email="29046864+Tremeschin@users.noreply.github.com"}]
-readme       = "Readme.md"
-license      = "AGPL-3.0"
+name = "broken-source"
+dynamic = ["version"]
+description = "🚀 Broken Source Software Main Library"
+authors = [
+    { name = "Tremeschin", email = "29046864+Tremeschin@users.noreply.github.com" },
+]
+readme = "Readme.md"
+license = "AGPL-3.0"
 requires-python = ">=3.9"
 dependencies = [
     # Data Structures
@@ -78,6 +80,7 @@ shaderflow = [
     "imgui~=2.0.0",
     "pygame~=2.6.0",
     "turbopipe~=1.2.1",
+    "xvfbwrapper~=0.2.9",
     # MIDI
     "midi2audio~=0.1.1",
     "pretty-midi~=0.2.10",
@@ -85,12 +88,8 @@ shaderflow = [
     "python-rtmidi~=1.5.8",
     "ordered-set~=4.1.0",
 ]
-gradio = [
-    "gradio==4.22.0",
-]
-staging = [
-    "schedule~=1.2.2",
-]
+gradio = ["gradio==4.22.0"]
+staging = ["schedule~=1.2.2"]
 website = [
     "mkdocs~=1.6.1",
     "mkdocstrings~=0.26.0",
@@ -128,11 +127,7 @@ dev-dependencies = [
 ]
 
 [tool.rye.workspace]
-members = [
-    "Private/Projects/*",
-    "Projects/*",
-    "Meta/*",
-]
+members = ["Private/Projects/*", "Projects/*", "Meta/*"]
 
 # # Hatchling
 
@@ -157,15 +152,15 @@ exclude = ["*"]
 
 [tool.poe.tasks]
 _transformers = "python -m pip install transformers"
-_torch_base   = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cpu"
-_torch_cuda   = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121"
-_torch_rocm   = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/rocm6.1"
-_torch_cpu    = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cpu"
-_del_torch    = "python -m pip uninstall -y torch"
-base          = ["_del_torch", "_torch_base", "_transformers"]
-cuda          = ["_del_torch", "_torch_cuda", "_transformers"]
-rocm          = ["_del_torch", "_torch_rocm", "_transformers"]
-cpu           = ["_del_torch", "_torch_cpu" , "_transformers"]
+_torch_base = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cpu"
+_torch_cuda = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121"
+_torch_rocm = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/rocm6.1"
+_torch_cpu = "python -m pip install torch==2.4.0 --index-url https://download.pytorch.org/whl/cpu"
+_del_torch = "python -m pip uninstall -y torch"
+base = ["_del_torch", "_torch_base", "_transformers"]
+cuda = ["_del_torch", "_torch_cuda", "_transformers"]
+rocm = ["_del_torch", "_torch_rocm", "_transformers"]
+cpu = ["_del_torch", "_torch_cpu", "_transformers"]
 
 # # Ruff
 
@@ -211,9 +206,7 @@ addopts = [
     "-ra",
 ]
 python_classes = "_PyTest"
-python_files = [
-    "Core/Broken*.py",
-]
+python_files = ["Core/Broken*.py"]
 
 # Others
 
