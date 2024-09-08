@@ -636,7 +636,7 @@ class ShaderScene(ShaderModule):
     benchmark: bool = False
     """Stress test the rendering speed of the Scene"""
 
-    loop: int = field(default=3, converter=int)
+    loop: int = field(default=1, converter=int)
     """Number of times to loop the exported video. One 1 keeps original, two 2 doubles the length.
     Ideally have seamless transitions on the shader based on self.tau and/or/no audio input"""
 
