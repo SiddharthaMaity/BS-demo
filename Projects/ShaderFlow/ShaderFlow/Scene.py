@@ -136,7 +136,7 @@ class ShaderScene(ShaderModule):
         )
 
         # Default modules
-        # self.init_window()
+        self.init_window()
         self.frametimer = ShaderFrametimer(scene=self)
         self.keyboard = ShaderKeyboard(scene=self)
         self.camera = ShaderCamera(scene=self)
@@ -529,7 +529,7 @@ class ShaderScene(ShaderModule):
         backend = ("egl" if BrokenPlatform.OnLinux and eval(os.getenv("WINDOW_EGL", "1")) else None)
 
         # Dynamically import the ModernGL Window Backend and instantiate it. Vsync is on our side 😉
-        module = f"moderngl_window.context.{denum(self.backend).lower()}"
+        module = "moderngl_window.context.headless"
         self.window = importlib.import_module(module).Window(
             size=self.resolution,
             title=self.title,
@@ -537,7 +537,7 @@ class ShaderScene(ShaderModule):
             visible=self.visible,
             fullscreen=self.fullscreen,
             vsync=False,
-            backend=backend
+            backend="egl"
         )
         ShaderKeyboard.set_keymap(self.window.keys)
         self.imgui  = ModernglImgui(self.window)
