@@ -539,7 +539,7 @@ class ShaderScene(ShaderModule):
         module = "moderngl_window.context.headless"
         # Create a context
         # Check if the context is using a GPU
-        self.window = importlib.import_module(module).Window(
+        self.window = ctx.Window(
             size=self.resolution,
             title=self.title,
             resizable=self.resizable,
