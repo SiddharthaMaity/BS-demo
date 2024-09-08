@@ -549,10 +549,10 @@ class ShaderScene(ShaderModule):
             vsync=False,
             backend="egl"
         )
+        print(self.window.ctx)
         ShaderKeyboard.set_keymap(self.window.keys)
         self.imgui  = ModernglImgui(self.window)
         self.opengl = self.window.ctx
-        print(self.window.ctx)
 
         # Bind window events to relay
         self.window.resize_func               = self.__window_resize__
