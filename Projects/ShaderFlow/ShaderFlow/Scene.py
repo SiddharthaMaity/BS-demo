@@ -136,7 +136,7 @@ class ShaderScene(ShaderModule):
         )
 
         # Default modules
-        self.init_window()
+        # self.init_window()
         self.frametimer = ShaderFrametimer(scene=self)
         self.keyboard = ShaderKeyboard(scene=self)
         self.camera = ShaderCamera(scene=self)
@@ -537,7 +537,7 @@ class ShaderScene(ShaderModule):
             visible=self.visible,
             fullscreen=self.fullscreen,
             vsync=False,
-            backend="egl"
+            backend=backend
         )
         ShaderKeyboard.set_keymap(self.window.keys)
         self.imgui  = ModernglImgui(self.window)
