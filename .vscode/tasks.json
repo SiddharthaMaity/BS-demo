@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "release-depthflow",
+            "type": "shell",
+            "command": "broken depthflow release --target linux-amd64 --target windows-amd64 --torch",
+        },
+        {
+            "label": "release-quadsnap",
+            "type": "shell",
+            "command": "broken quadsnap release",
+        },
+        {
+            "label": "release-shaderflow",
+            "type": "shell",
+            "command": "broken shaderflow release --target linux-amd64 --target windows-amd64",
+        },
+        {
+            "label": "release-upscalin",
+            "type": "shell",
+            "command": "broken upscalin release  --target linux-amd64 --target windows-amd64 ",
+        },
+    ]
+}

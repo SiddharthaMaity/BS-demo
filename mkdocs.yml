@@ -1,0 +1,248 @@
+site_name: Broken Source Software
+site_description: Unified Documentation and Resources
+site_url: https://brokensrc.dev/
+repo_url: https://github.com/BrokenSource/BrokenSource/
+edit_uri: edit/main/Website/
+repo_name: GitHub
+site_author: Tremeschin
+copyright: © 2023-2024, <a href="https://github.com/Tremeschin/" target="_blank">Tremeschin</a> 🇧🇷
+docs_dir: Website
+site_dir: Build/Website
+nav:
+  - Home:
+    - index.md
+    - Installation:
+      - get/index.md
+      - 🧀 From PyPI: get/pypi.md
+      - 🔥 From Source: get/source.md
+      - 📦 From Releases: get/releases.md
+      - ♻️ Uninstalling: get/uninstalling.md
+    - Special:
+      - 🐳 Docker: get/docker.md
+      - 🔦 PyTorch: get/pytorch.md
+      - ❤️ Sponsors: about/sponsors.md
+    - About:
+      - 🛠️ Contribuing: about/contributing.md
+      - 👤 Developers: about/developers.md
+      - 🧭 Roadmap: about/roadmap.md
+      - 💬 Contact: about/contact.md
+      - ⚖️ License: about/license.md
+      - 🧾 Credits: about/credits.md
+
+  - News:
+    - news/index.md
+    - news/authors.md
+
+  - Broken:
+    - Code Reference: broken/reference/
+
+  - DepthFlow:
+    - depthflow/index.md
+    - 📦 Installation: depthflow/get/index.md
+    - Code Reference: depthflow/reference/
+
+  - ShaderFlow:
+    - shaderflow/index.md
+    - 📦 Installation: shaderflow/get/index.md
+    - Usage:
+      - Controls: shaderflow/controls.md
+    - Code Reference: shaderflow/reference/
+
+  - Pianola:
+    - pianola/index.md
+    - 📦 Installation: pianola/get/index.md
+    - Code Reference: pianola/reference/
+
+  - SpectroNote:
+    - spectronote/index.md
+    - 📦 Installation: spectronote/get/index.md
+    - Code Reference: spectronote/reference/
+
+exclude_docs: |
+  make.py
+
+extra_css:
+  - css/extra.css
+
+theme:
+  name: material
+  logo: resources/images/broken.png
+  favicon: resources/images/broken.png
+  font:
+    text: Roboto Slab
+    code: Roboto Mono
+  icon:
+    annotation: material/plus-circle-outline
+    repo: fontawesome/brands/github
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.prune
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
+    - search.suggest
+    - search.highlight
+    - search.share
+    - toc.follow
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tabs.link
+    - announce.dismiss
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      primary: black
+      scheme: slate
+      accent: blue
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to Light Mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to Dark Mode
+
+plugins:
+  # - meta
+  - blog:
+      blog_dir: "news"
+      post_url_date_format: yyyy
+      draft: true
+  - social:
+      cards_layout_options:
+        font_family: Roboto Slab
+        background_color: "#4854b4"
+  - search
+  - autorefs
+  - site-urls
+  # - privacy # Fixme: Ignore shields.io
+  - literate-nav
+  - gen-files:
+      scripts:
+        - Website/make.py
+  - mkdocstrings:
+      handlers:
+        python:
+
+          # https://mkdocstrings.github.io/python/usage
+          options:
+
+            # General
+            show_bases: false
+            show_source: true
+
+            # Headings
+            # heading_level: 2
+            show_root_heading: true
+            show_root_toc_entry: true
+            show_root_full_path: true
+            show_root_members_full_path: true
+            show_object_full_path: false
+            show_category_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+
+            # Members
+            inherited_members: false
+            members_order: "source"
+            group_by_category: false
+            show_submodules: false
+            summary: true
+            show_labels: true
+
+            # Docstrings
+            docstring_style: google
+            docstring_section_style: list
+            show_if_no_docstring: true
+
+            # Signatures
+            annotations_path: source
+            show_signature: true
+            show_signature_annotations: true
+            signature_crossrefs: true
+            separate_signature: false
+            line_length: 60
+
+  - minify:
+      minify_html: false
+      minify_js: false
+      minify_css: false
+      htmlmin_opts:
+          remove_comments: true
+      cache_safe: true
+
+  - include-markdown:
+      preserve_includer_indent: true
+      dedent: false
+      trailing_newlines: true
+      comments: false
+      rewrite_relative_urls: true
+      heading_offset: 0
+      # start: <!--start-->
+      # end: <!--end-->
+
+markdown_extensions:
+  - pymdownx.arithmatex
+  - pymdownx.magiclink
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.highlight:
+      linenums: true
+      use_pygments: true
+      auto_title: true
+      pygments_lang_class: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+  - github-callouts
+  - md_in_html
+  - attr_list
+  - tables
+  - admonition
+  - footnotes
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra:
+  analytics:
+    provider: google
+    property: G-1S2RXTSLF2
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/KjqvcYwRHm
+      name: Discord
+    - icon: fontawesome/brands/telegram
+      link: https://t.me/BrokenSource
+      name: Telegram
+    - icon: fontawesome/brands/patreon
+      link: https://www.patreon.com/Tremeschin
+      name: Patreon
+    - icon: fontawesome/brands/github
+      link: https://github.com/Tremeschin
+      name: GitHub
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@Tremeschin
+      name: YouTube
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/Tremeschinni
+      name: Twitter

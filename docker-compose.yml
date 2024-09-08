@@ -1,0 +1,53 @@
+services:
+
+  # Base images
+
+  broken-base: &common
+    image: broken-base-local
+    build:
+      context: .
+      dockerfile: Docker/base.dockerfile
+
+    volumes:
+      - /usr/lib/wsl:/usr/lib/wsl
+      - .:/app
+
+    # "--gpus=all"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: all
+
+  # Sanity checks, assertions
+
+  glinfo:
+    image: glinfo-local
+    build:
+      context: .
+      dockerfile: Docker/glinfo.dockerfile
+    depends_on:
+      - broken-base
+    <<: *common
+
+  # Actual software
+
+  shaderflow:
+    image: shaderflow-local
+    build:
+      context: .
+      dockerfile: Docker/shaderflow.dockerfile
+    depends_on:
+      - broken-base
+    <<: *common
+
+  depthflow:
+    image: depthflow-local
+    build:
+      context: .
+      dockerfile: Docker/depthflow.dockerfile
+    depends_on:
+      - broken-base
+    <<: *common

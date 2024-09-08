@@ -1,0 +1,26 @@
+# Monorepo
+.cache
+Build
+Insiders
+Meta
+Private
+Release
+Temp
+Workspace
+
+# Python
+**__pycache__*
+*.pyc
+dist
+
+# Rye
+requirements*.lock
+
+# Syncthing
+.stfolder
+
+# Custom
+___*
+
+.venv
+.aider*

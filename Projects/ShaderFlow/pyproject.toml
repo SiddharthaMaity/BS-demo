@@ -1,0 +1,41 @@
+[project.urls]
+Changelog = "https://brokensrc.dev/news/category/releases"
+GitHub    = "https://github.com/BrokenSource/ShaderFlow"
+Funding   = "https://brokensrc.dev/about/sponsors"
+Contact   = "https://brokensrc.dev/about/contact"
+Download  = "https://brokensrc.dev/get/releases"
+Docs      = "https://brokensrc.dev/shaderflow"
+Homepage  = "https://brokensrc.dev"
+
+[project]
+name        = "shaderflow"
+dynamic     = ["readme"]
+version     = "0.0.0"
+description = "🔥 Imagine ShaderToy, on a Manim-like architecture. That's ShaderFlow."
+authors     = [{name="Tremeschin", email="29046864+Tremeschin@users.noreply.github.com"}]
+license     = "AGPL-3.0"
+requires-python = ">=3.9"
+dependencies = [
+    "broken-source[shaderflow]>=0.0.0",
+]
+
+[project.scripts]
+shaderflow = "ShaderFlow.__main__:main"
+shader = "ShaderFlow.__main__:main"
+
+[tool.rye]
+managed = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["ShaderFlow"]
+
+[build-system]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+start-after = "<!-- PyPI -->"
+path = "Readme.md"

@@ -1,0 +1,44 @@
+[project.urls]
+Changelog = "https://brokensrc.dev/news/category/releases"
+GitHub    = "https://github.com/BrokenSource/DepthFlow"
+Funding   = "https://brokensrc.dev/about/sponsors"
+Contact   = "https://brokensrc.dev/about/contact"
+Download  = "https://brokensrc.dev/get/releases"
+Docs      = "https://brokensrc.dev/depthflow"
+Homepage  = "https://brokensrc.dev"
+
+[project]
+name        = "depthflow"
+dynamic     = ["readme"]
+version     = "0.0.0"
+description = "🌊 Image to → 2.5D Parallax Effect Video. A Free and Open Source ImmersityAI alternative"
+authors     = [{name="Tremeschin", email="29046864+Tremeschin@users.noreply.github.com"}]
+license     = "AGPL-3.0"
+requires-python = ">=3.9"
+dependencies = [
+    "broken-source[gradio]>=0.0.0",
+    "shaderflow>=0.0.0",
+]
+
+[project.scripts]
+depthflow-webui = "DepthFlow.__main__:main_webui"
+depthflow = "DepthFlow.__main__:main"
+depth-webui = "DepthFlow.__main__:main_webui"
+depth = "DepthFlow.__main__:main"
+
+[tool.rye]
+managed = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["DepthFlow"]
+
+[build-system]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+start-after = "<!-- PyPI -->"
+path = "Readme.md"

@@ -1,0 +1,90 @@
+name: release
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "Broken/Version.py"
+
+jobs:
+  releases:
+    name: Release (${{matrix.os}})
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, windows-latest, macos-14]
+    steps:
+      - uses: BrokenSource/BrokenSource@main
+        name: Broken Setup
+
+      # DepthFlow
+
+      - name: Build DepthFlow CLI
+        run: rye run broken depthflow release --torch
+
+      - name: Build DepthFlow WebUI
+        run: rye run broken depthflow release --torch --webui
+
+      - name: Upload DepthFlow releases
+        uses: actions/upload-artifact@v3
+        with:
+          name: DepthFlow
+          path: Release/depthflow*
+
+      # Pianola
+
+      - name: Build Pianola
+        run: rye run broken pianola release
+
+      - name: Upload Pianola releases
+        uses: actions/upload-artifact@v3
+        with:
+          name: Pianola
+          path: Release/pianola*
+
+      # ShaderFlow
+
+      - name: Build ShaderFlow
+        run: rye run broken shaderflow release
+
+      - name: Upload ShaderFlow releases
+        uses: actions/upload-artifact@v3
+        with:
+          name: ShaderFlow
+          path: Release/shaderflow*
+
+      # SpectroNote
+
+      - name: Build SpectroNote
+        run: rye run broken spectronote release
+
+      - name: Upload SpectroNote releases
+        uses: actions/upload-artifact@v3
+        with:
+          name: SpectroNote
+          path: Release/spectronote*
+
+  wheels:
+    name: Release Wheels
+    runs-on: ubuntu-latest
+    needs: releases
+    steps:
+      - uses: BrokenSource/BrokenSource@main
+        name: Broken Setup
+
+      - name: Build wheels
+        run: rye run broken pypi --publish
+        env:
+          PYPI_TOKEN: ${{secrets.PYPI_TOKEN}}
+
+      - name: Upload wheels
+        uses: actions/upload-artifact@v3
+        with:
+          name: Wheels
+          path: Build/Wheels/*.whl
+
+      - name: Create Release Tag
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git tag -a v$BROKEN_VERSION -m "Release v$BROKEN_VERSION"
+          git push origin v$BROKEN_VERSION

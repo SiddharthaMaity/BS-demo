@@ -1,0 +1,41 @@
+[project.urls]
+Changelog = "https://brokensrc.dev/news/category/releases"
+GitHub    = "https://github.com/BrokenSource/Pianola"
+Funding   = "https://brokensrc.dev/about/sponsors"
+Contact   = "https://brokensrc.dev/about/contact"
+Download  = "https://brokensrc.dev/get/releases"
+Docs      = "https://brokensrc.dev/pianola"
+Homepage  = "https://brokensrc.dev"
+
+[project]
+name        = "pianola"
+dynamic     = ["readme"]
+version     = "0.0.0"
+description = "🎹 World's Smoothest and Most Customizable Piano Roll. Real time, Interactive, Black Midi proof"
+authors     = [{name="Tremeschin", email="29046864+Tremeschin@users.noreply.github.com"}]
+license     = "AGPL-3.0"
+requires-python = ">=3.9"
+dependencies = [
+    "broken-source>=0.0.0",
+    "shaderflow>=0.0.0",
+]
+
+[project.scripts]
+pianola = "Pianola.__main__:main"
+
+[tool.rye]
+managed = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["Pianola"]
+
+[build-system]
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+start-after = "<!-- PyPI -->"
+path = "Readme.md"

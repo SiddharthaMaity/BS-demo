@@ -1,0 +1,14 @@
+___*
+.cache
+.venv
+.vscode
+Build
+Meta
+Private
+*.env
+*.dockerfile
+
+# Common files across projects
+**/Workspace
+**/Website
+**/.github
