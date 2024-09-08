@@ -537,7 +537,7 @@ class ShaderScene(ShaderModule):
             visible=self.visible,
             fullscreen=self.fullscreen,
             vsync=False,
-            backend=backend
+            backend="egl"
         )
         ShaderKeyboard.set_keymap(self.window.keys)
         self.imgui  = ModernglImgui(self.window)
